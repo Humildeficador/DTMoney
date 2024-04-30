@@ -46,7 +46,7 @@ export function NewTransactionModal({ isOpen, onRequestClose }: NewTransactionMo
                     placeholder="Categoria"
                 />
 
-                <TransactionTypeContainer>
+                <TransactionsTypeContainer>
                     <RadioBox
                         type="button"
                         onClick={() => { setType('deposit') }}
@@ -71,7 +71,7 @@ export function NewTransactionModal({ isOpen, onRequestClose }: NewTransactionMo
                         }
                         <span>Saída</span>
                     </RadioBox>
-                </TransactionTypeContainer>
+                </TransactionsTypeContainer>
 
                 <button type="submit">
                     Cadastrar
