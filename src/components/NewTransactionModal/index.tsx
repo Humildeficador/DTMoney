@@ -6,6 +6,7 @@ import outcomeImg from '../../assets/outcome.svg'
 import outcomeWhiteImg from '../../assets/outcome-white.svg'
 import closeImg from '../../assets/close.svg'
 import { FormEvent, useState } from "react"
+import { api } from "../../services/api"
 
 interface NewTransactionModalProps {
     isOpen: boolean
@@ -21,12 +22,15 @@ export function NewTransactionModal({ isOpen, onRequestClose }: NewTransactionMo
     function handleCreateNewTransaction (event: FormEvent) {
         event.preventDefault()
 
-        console.log({
+        const data = {
             title,
             value,
             category,
-            type
-        })
+            type,
+            createdAt: new Date()
+        }
+
+        api.post('/transactions', data)
     }
 
     return (
@@ -70,8 +74,8 @@ export function NewTransactionModal({ isOpen, onRequestClose }: NewTransactionMo
                     <RadioBox
                         type="button"
                         onClick={() => { setType('deposit') }}
-                        isActive={type === 'deposit'}
-                        activeColor='green'
+                        $isActive={type === 'deposit'}
+                        $activeColor='green'
                         >
                         {type === 'deposit' 
                             ? <img src={incomeWhiteImg} alt="Saída" />
@@ -82,8 +86,8 @@ export function NewTransactionModal({ isOpen, onRequestClose }: NewTransactionMo
                     <RadioBox
                         type="button"
                         onClick={() => { setType('withdraw') }}
-                        isActive={type === 'withdraw'}
-                        activeColor='red'
+                        $isActive={type === 'withdraw'}
+                        $activeColor='red'
                     >
                         {type === 'withdraw'
                             ? <img src={outcomeWhiteImg} alt="Saída" />

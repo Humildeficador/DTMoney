@@ -1,29 +1,45 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { TransactionsTableContainer } from "./styles";
 import { api } from "../../services/api";
 
+interface Transaction {
+    id: number
+    title: string
+    type: string
+    category: string
+    value: number
+    createdAt: string
+}
+
 export function TransactionsTable() {
+    const [transactions, setTransactions] = useState<Transaction[]>([])
+
     useEffect(() => {
         api.get('transactions')
-        .then(data => console.log(data))
+            .then(response => setTransactions(response.data.transactions))
     }, [])
 
     return (
         <TransactionsTableContainer>
             <table>
                 <tbody>
-                    <tr>
-                        <td>Desenvolvimento de website</td>
-                        <td className="deposit">R$12.000,00</td>
-                        <td>Venda</td>
-                        <td>13/04/2022</td>
-                    </tr>
-                    <tr>
-                        <td>Aluguel</td>
-                        <td className="withdraw">R$1.100,00</td>
-                        <td>Casa</td>
-                        <td>17/04/2022</td>
-                    </tr>
+                    {transactions.map((transaction) => (
+                        <tr key={transaction.id}>
+                            <td>{transaction.title}</td>
+                            <td className={transaction.type}>
+                                {new Intl.NumberFormat('pt-BR', {
+                                    style: 'currency',
+                                    currency: 'BRL'
+                                }).format(transaction.value)}
+                            </td>
+                            <td>{transaction.category}</td>
+                            <td>
+                                {new Intl.DateTimeFormat('pt-BR').format(
+                                    new Date(transaction.createdAt)
+                                )}
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </TransactionsTableContainer>

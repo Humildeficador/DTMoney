@@ -50,16 +50,16 @@ export const TransactionTypeContainer = styled.div`
 `
 
 interface RadioBoxProps {
-    isActive: boolean
-    activeColor: 'green' | 'red'
+    $isActive: boolean
+    $activeColor: 'green' | 'red'
 }
 
 export const RadioBox = styled.button<RadioBoxProps>`
     height: 3.625rem;
         border: 0;
         border-radius: 0.25rem;
-        background: ${(props) => props.isActive
-        ? props.activeColor === 'green'
+        background: ${(props) => props.$isActive
+        ? props.$activeColor === 'green'
             ? 'var(--green-dark)'
             : 'var(--red-dark)'
         : 'var(--shape)'
@@ -80,10 +80,10 @@ export const RadioBox = styled.button<RadioBoxProps>`
             display: inline-block;
             margin-left: 1rem;
             font-size: 1rem;
-            color: ${(props) => props.isActive ? 'var(--text-button)' : 'var(--text-body)'};
+            color: ${(props) => props.$isActive ? 'var(--text-button)' : 'var(--text-body)'};
         }
 
         &:hover {
-            background: ${(props) => props.isActive ? '' : 'var(--shape2)'};
+            background: ${(props) => props.$isActive ? '' : 'var(--shape2)'};
         }
 `
