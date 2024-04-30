@@ -41,3 +41,49 @@ export const NewTransactionModalContainer = styled.form`
         }
     }
 `;
+
+export const TransactionTypeContainer = styled.div`
+    margin: 1rem 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+`
+
+interface RadioBoxProps {
+    isActive: boolean
+    activeColor: 'green' | 'red'
+}
+
+export const RadioBox = styled.button<RadioBoxProps>`
+    height: 3.625rem;
+        border: 0;
+        border-radius: 0.25rem;
+        background: ${(props) => props.isActive
+        ? props.activeColor === 'green'
+            ? 'var(--green-dark)'
+            : 'var(--red-dark)'
+        : 'var(--shape)'
+        };
+
+        transition: background 0.2s;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            width: 24px;
+            height: 24px;
+        }
+
+        span {
+            display: inline-block;
+            margin-left: 1rem;
+            font-size: 1rem;
+            color: ${(props) => props.isActive ? 'var(--text-button)' : 'var(--text-body)'};
+        }
+
+        &:hover {
+            background: ${(props) => props.isActive ? '' : 'var(--shape2)'};
+        }
+`
